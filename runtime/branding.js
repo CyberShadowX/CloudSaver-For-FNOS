@@ -1,7 +1,7 @@
 (() => {
   'use strict';
-  const originalNames = new Set(['Cloud Saver', 'CloudSaver']);
-  const newName = 'CloudSaver For FNOS';
+  const originalNames = new Set(['Cloud Saver', 'CloudSaver', 'CloudSaver For FNOS']);
+  const newName = 'CloudSaver';
   const upstreamLink = /^(https:\/\/github\.com\/jiangrui1994\/)cloudsaver(?=\/|[?#]|$)/i;
   const projectLink = /^(https:\/\/github\.com\/CyberShadowX\/)cloudsaver(?:-for-fnos)?(?=\/|[?#]|$)/i;
   let images = [];
@@ -11,13 +11,14 @@
   const refresh = () => {
     for (const image of images) {
       const alt = image.getAttribute('alt');
-      if (originalNames.has(alt)) image.setAttribute('alt', newName);
-      else if (alt && alt.endsWith(' Logo') && originalNames.has(alt.slice(0, -5))) {
-        image.setAttribute('alt', `${newName} Logo`);
+      if (originalNames.has(alt)) {
+        if (alt !== newName) image.setAttribute('alt', newName);
+      } else if (alt && alt.endsWith(' Logo') && originalNames.has(alt.slice(0, -5))) {
+        if (alt !== `${newName} Logo`) image.setAttribute('alt', `${newName} Logo`);
       }
     }
     for (const heading of headings) {
-      if (originalNames.has(heading.textContent)) heading.textContent = newName;
+      if (originalNames.has(heading.textContent) && heading.textContent !== newName) heading.textContent = newName;
     }
     for (const link of links) {
       const href = link.getAttribute('href');
@@ -26,7 +27,7 @@
         .replace(projectLink, '$1CloudSaver-For-FNOS');
       if (normalized !== href) link.setAttribute('href', normalized);
     }
-    if (originalNames.has(document.title)) document.title = newName;
+    if (originalNames.has(document.title) && document.title !== newName) document.title = newName;
   };
 
   const observer = new MutationObserver(refresh);

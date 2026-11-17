@@ -2,20 +2,20 @@
 
 # CloudSaver For FNOS
 
-[CloudSaver For FNOS](https://github.com/CyberShadowX/CloudSaver-For-FNOS) 是面向飞牛 fnOS 的原生封装：从飞牛桌面打开原有网页，在应用中心管理启动、停止和升级，个人频道与其他设置保存在设备自己的数据目录。上游应用名称为 **CloudSaver**；本项目使用其官方蓝色 CS 图标。
+[CloudSaver For FNOS](https://github.com/CyberShadowX/CloudSaver-For-FNOS) 是本 GitHub 项目的名称。安装到 NAS 的应用始终名为 **CloudSaver**，包括应用中心、桌面图标、网页左上角、浏览器标题和安装名称；使用官方蓝色 CS 图标。个人频道与其他设置保存在设备自己的数据目录。
 
-已在 fnOS `1.2.1011` / Debian 12 / x86_64 完成原生安装、已有配置迁移、真实搜索、启停及应用中心原位升级验收。[验收范围与限制](docs/VALIDATION.md) · [v1.0.2 发行说明](RELEASE_NOTES.md)
+已在 fnOS `1.2.1011` / Debian 12 / x86_64 完成原生安装、已有配置迁移、真实搜索、启停及应用中心原位升级验收。[验收范围与限制](docs/VALIDATION.md) · [v1.0.3 发行说明](RELEASE_NOTES.md)
 
 | 项目 | 当前版本 |
 | --- | --- |
-| 封装版本 | `1.0.2` |
+| 封装版本 | `1.0.3` |
 | 固定上游版本 | CloudSaver `0.9.3` |
 | 平台 | fnOS `1.2.1010` 或以上，x86_64 / amd64（FPK 标识为 `x86`） |
 | 网页入口 | HTTP `8008`，从飞牛桌面图标打开 |
 | 内部后端 | `127.0.0.1:18009` |
 | 应用标识 | `CloudSaver` |
 
-显示名称为 `CloudSaver For FNOS`。应用标识、系统账户和数据目录继续使用 `CloudSaver`，已有安装通过原位升级保留配置。历史 `v1.0.1` 标签及附件保留原名、原内容和摘要。
+应用显示名称、标识、系统账户和数据目录均为 `CloudSaver`；GitHub 项目名与仓库地址使用 `CloudSaver For FNOS` / `CloudSaver-For-FNOS`。1.0.3 修正了 1.0.2 将仓库名误用到应用界面的问题。已有安装通过原位升级保留配置，历史标签及附件保留原内容和摘要。
 
 ## 原生运行方式
 
@@ -28,8 +28,8 @@
 ## 安装与使用
 
 1. 从本项目的对应版本发行页面取得 FPK 与 `SHA256SUMS.txt`，核对安装包摘要。
-2. 确认设备可以访问官方 Docker Hub，且 `8008`、`18009` 端口空闲。在飞牛应用中心手动上传 `CloudSaver-For-FNOS-1.0.2-x86.fpk`。
-3. 等待官方程序下载、校验和初始化结束，再从飞牛桌面打开 CloudSaver For FNOS。
+2. 确认设备可以访问官方 Docker Hub，且 `8008`、`18009` 端口空闲。在飞牛应用中心手动上传 `CloudSaver-1.0.3-x86.fpk`。
+3. 等待官方程序下载、校验和初始化结束，再从飞牛桌面打开 CloudSaver。
 4. 新部署按上游页面完成注册、网络和网盘设置；已有 Docker 部署按下节迁移后再验收。
 
 首次安装需要联网，不是完整离线安装包；设备缺少 `python3-aiohttp` 时，安装钩子会从设备已配置的软件源安装该依赖。默认入口使用 HTTP，适合受控的家庭网络或已有的安全远程入口；需要 HTTPS 时，可使用自己的受控反向代理。
@@ -72,7 +72,7 @@ python tools/build_package.py --fnpack 'F:\path\to\verified\fnpack.exe' --output
 
 将示例路径替换为**经过核验的官方 fnpack `1.2.3` Windows 可执行文件绝对路径**。构建器会再次检查其 SHA-256，固定值保存在 [build_package.py](tools/build_package.py) 中；不匹配时拒绝执行。
 
-构建输出为 `dist/CloudSaver-For-FNOS-1.0.2-x86.fpk`、`dist/build-inventory.json` 和 `dist/SHA256SUMS.txt`。构建不会把设备上的上游运行目录或个人数据装入 FPK。Windows 上的 Linux 专属测试会跳过，源码测试通过不能替代目标 NAS 实测。
+构建输出为 `dist/CloudSaver-1.0.3-x86.fpk`、`dist/build-inventory.json` 和 `dist/SHA256SUMS.txt`。构建不会把设备上的上游运行目录或个人数据装入 FPK。Windows 上的 Linux 专属测试会跳过，源码测试通过不能替代目标 NAS 实测。
 
 ## 更新与恢复
 

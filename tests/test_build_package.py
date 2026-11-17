@@ -15,7 +15,7 @@ import build_package
 
 
 class FpkFormatTests(unittest.TestCase):
-    def test_new_display_brand_keeps_the_existing_app_identity(self):
+    def test_app_brand_and_package_name_are_separate_from_the_project_repository(self):
         work = Path(__file__).resolve().parents[1] / "work"
         work.mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(prefix="fpk-brand-", dir=work) as folder:
@@ -51,15 +51,15 @@ class FpkFormatTests(unittest.TestCase):
                     mock.patch.object(build_package.subprocess, "run", side_effect=fake_fnpack):
                 inventory = build_package.build(fnpack, root / "output")
 
-            package_name = f"CloudSaver-For-FNOS-{build_package.VERSION}-x86.fpk"
+            package_name = f"CloudSaver-{build_package.VERSION}-x86.fpk"
             self.assertEqual(inventory["file"], package_name)
-            self.assertFalse((root / "output" / f"CloudSaver-{build_package.VERSION}-x86.fpk").exists())
+            self.assertFalse((root / "output" / f"CloudSaver-For-FNOS-{build_package.VERSION}-x86.fpk").exists())
             outer = build_package.archive_files((root / "output" / package_name).read_bytes())
             manifest = dict(line.split(" = ", 1) for line in outer["manifest"].decode().splitlines())
             self.assertEqual(manifest["appname"], "CloudSaver")
             self.assertEqual(manifest["desktop_applaunchname"], "CloudSaver.Application")
-            self.assertEqual(manifest["display_name"], "CloudSaver For FNOS")
-            self.assertTrue(manifest["desc"].startswith("CloudSaver For FNOS "))
+            self.assertEqual(manifest["display_name"], "CloudSaver")
+            self.assertTrue(manifest["desc"].startswith("CloudSaver "))
             self.assertEqual(manifest["maintainer_url"], "https://github.com/CyberShadowX/CloudSaver-For-FNOS")
             self.assertEqual(manifest["service_port"], "8008")
             self.assertEqual(json.loads(outer["config/privilege"]), {
@@ -67,7 +67,7 @@ class FpkFormatTests(unittest.TestCase):
             payload = build_package.archive_files(outer["app.tgz"])
             desktop = json.loads(payload["ui/config"])[".url"]
             self.assertEqual(set(desktop), {"CloudSaver.Application"})
-            self.assertEqual(desktop["CloudSaver.Application"]["title"], "CloudSaver For FNOS")
+            self.assertEqual(desktop["CloudSaver.Application"]["title"], "CloudSaver")
             self.assertEqual(desktop["CloudSaver.Application"]["icon"], "images/icon_{0}.png")
             self.assertEqual(payload["THIRD_PARTY_NOTICES.md"], (root / "THIRD_PARTY_NOTICES.md").read_bytes())
             for size, name in ((64, "ICON.PNG"), (256, "ICON_256.PNG")):

@@ -13,11 +13,11 @@ import tarfile
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.0.2"
+VERSION = "1.0.3"
 # Keep the installed identity stable so upgrades retain the existing account and data.
 APP_ID = "CloudSaver"
-DISPLAY_NAME = "CloudSaver For FNOS"
-PACKAGE_BASENAME = "CloudSaver-For-FNOS"
+DISPLAY_NAME = "CloudSaver"
+PACKAGE_BASENAME = "CloudSaver"
 FNPACK_SHA256 = "d7af4bd716b009c58f5bcd931615f39db121e7d4b75dc759e575c4fb2879b6ee"
 SOURCES = (
     "runtime/supervisor.py", "runtime/loopback.cjs", "runtime/branding.js", "runtime/lifecycle.py",

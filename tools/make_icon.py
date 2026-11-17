@@ -108,7 +108,7 @@ def main() -> None:
             ASSETS / f"icon_{size}.png", optimize=True
         )
     source.save(
-        ASSETS / "CloudSaver-For-FNOS.ico",
+        ASSETS / "CloudSaver.ico",
         format="ICO",
         sizes=[(size, size) for size in ICO_SIZES],
     )
