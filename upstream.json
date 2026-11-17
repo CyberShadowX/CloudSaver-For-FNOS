@@ -1,0 +1,13 @@
+{
+  "application": "CloudSaver",
+  "version": "0.9.3",
+  "repository": "jiangrui1994/cloudsaver",
+  "manifest_digest": "sha256:13fb594cd6e215e107074b4b82a4456f08aea17d196bda882263fa124cee0d86",
+  "image_id": "sha256:b1bc705be78fe6b51f6c5b92926acc8fa2932c3a328681b57de22b0f0b0bd35c",
+  "os": "linux",
+  "architecture": "amd64",
+  "node_version": "18.20.8",
+  "upstream_program_bundled_in_fpk": false,
+  "source_url": "https://github.com/jiangrui1994/CloudSaver",
+  "distribution_note": "The wrapper fetches the pinned official runtime on the installation device. Newer upstream programs are not redistributed by this repository or its FPK."
+}
