@@ -1,0 +1,36 @@
+{
+  "source": {
+    "repository": "https://github.com/jiangrui1994/CloudSaver",
+    "commit": "672cc48ab656973de2675383c966a5336d9de372",
+    "path": "docs/logo.svg",
+    "url": "https://raw.githubusercontent.com/jiangrui1994/CloudSaver/672cc48ab656973de2675383c966a5336d9de372/docs/logo.svg",
+    "git_blob_sha1": "27628cf907072ea1875264dfc40de5bdf7b2b4a7",
+    "sha256": "532ff4db0324e75112098c1259dee2ed5ed641d6c7cfde9791a60d1dc6b7baa4",
+    "local_file": "official-logo.svg",
+    "modifications": "None; original upstream bytes preserved."
+  },
+  "license": {
+    "spdx": "MIT",
+    "copyright": "Copyright (c) 2024 CloudSaver",
+    "url": "https://github.com/jiangrui1994/CloudSaver/blob/672cc48ab656973de2675383c966a5336d9de372/LICENSE",
+    "sha256": "a1aa4a926ec6d0aaccda2991d986eb40767726b1b85d5c79b58785118f8e7b0c",
+    "notice": "../THIRD_PARTY_NOTICES.md",
+    "asset_metadata": "The official SVG contains no separate title, description, copyright or license metadata."
+  },
+  "canonical_raster": {
+    "local_file": "official-logo.png",
+    "size": [2048, 2048],
+    "mode": "RGBA",
+    "sha256": "9ba94ee049a0e9d07ee2480aca30c83b28b72888c0cdbae74d15ad3c1e40c045",
+    "renderer": "Microsoft Edge 148.0.3967.54 via Playwright; device scale factor 1; sRGB; transparent background",
+    "normalization": "Pillow 12.2.0 RGBA PNG, optimize=True, no added metadata",
+    "composition": "Original complete square SVG viewBox; no crop, recolor, background, outline or added shadow."
+  },
+  "exports": {
+    "tool": "../tools/make_icon.py",
+    "pillow_version": "12.2.0",
+    "png_sizes": [64, 256, 512],
+    "ico_sizes": [16, 24, 32, 48, 64, 128, 256],
+    "method": "Resize the checked-in canonical raster with Pillow LANCZOS; preserve RGBA transparency and the full square canvas."
+  }
+}

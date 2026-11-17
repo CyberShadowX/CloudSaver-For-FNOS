@@ -370,8 +370,8 @@ def _branded_manifest(path: Path) -> bytes | None:
         return None
     changed = False
     for field in ("name", "short_name"):
-        if manifest.get(field) == "Cloud Saver":
-            manifest[field] = "CloudSaver"
+        if manifest.get(field) in ("Cloud Saver", "CloudSaver"):
+            manifest[field] = "CloudSaver For FNOS"
             changed = True
     return json.dumps(manifest, ensure_ascii=False, separators=(",", ":")).encode("utf-8") if changed else None
 

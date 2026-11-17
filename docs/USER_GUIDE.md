@@ -1,6 +1,6 @@
-# CloudSaver 使用与迁移指南
+# CloudSaver For FNOS 使用与迁移指南
 
-本文随 CloudSaver `1.0.1` 封装提供，固定上游版本为 `0.9.3`，目标为 fnOS `1.2.1010+`、x86_64（amd64；FPK 平台标识为 `x86`）。
+本文随 CloudSaver For FNOS `1.0.2` 封装提供，固定上游 CloudSaver 版本为 `0.9.3`，目标为 fnOS `1.2.1010+`、x86_64（amd64；FPK 平台标识为 `x86`）。
 
 本文说明安装、迁移和恢复流程；具体实测系统、通过项目与未验证项请查看对应版本的发行说明。
 
@@ -9,7 +9,7 @@
 1. 核对 FPK 的 SHA-256 与对应版本的 `SHA256SUMS.txt`。
 2. 确认 `8008` 和 `18009` 端口未被其他服务占用，并确保安装期间可访问官方 Docker Hub。缺少 `python3-aiohttp` 时还需要访问设备已配置的软件源。
 3. 在飞牛应用中心手动上传 FPK，等待固定版本程序完成下载、摘要校验与初始化。
-4. 从飞牛桌面的 CloudSaver 图标进入网页；首次使用按上游界面完成注册和设置。
+4. 从飞牛桌面的 CloudSaver For FNOS 官方蓝色 CS 图标进入网页；首次使用按上游界面完成注册和设置。
 
 首次安装会在设备上获取官方程序，公共 FPK 本身不包含上游较新版本程序，也不包含个人账号、频道或网盘配置。全新设备的 JWT 密钥随机生成；导入已有配置时保留原配置中的必要密钥。
 
@@ -17,7 +17,7 @@
 
 ## 数据保存在哪里
 
-飞牛登记入口为 `/var/apps/CloudSaver/`。实际存储卷由安装位置决定，不应假定某个固定磁盘目录。
+飞牛登记入口为 `/var/apps/CloudSaver/`。显示名称改为 CloudSaver For FNOS，应用标识、账户和目录保持 CloudSaver，以便原位升级和保留配置。实际存储卷由安装位置决定，不应假定某个固定磁盘目录。
 
 | 位置 | 用途与处理方式 |
 | --- | --- |
@@ -105,6 +105,8 @@ sudo python3 /var/apps/CloudSaver/target/tools/snapshot_state.py --var /var/apps
 
 ## 报告问题与隐私
 
-向 [CloudSaver 项目](https://github.com/CyberShadowX/CloudSaver) 提交问题时，提供封装版本、上游版本、系统与架构、复现步骤和经过检查的错误摘要。截图与日志分享前检查个人频道、账号、Cookie、密钥及其他运行资料。
+向 [CloudSaver For FNOS 项目](https://github.com/CyberShadowX/CloudSaver-For-FNOS) 提交问题时，提供封装版本、上游版本、系统与架构、复现步骤和经过检查的错误摘要。截图与日志分享前检查个人频道、账号、Cookie、密钥及其他运行资料。
 
 本项目的 MIT 许可覆盖封装代码；上游应用和第三方资料各自遵循其授权。CloudSaver 较新上游程序只在安装设备从官方来源获取，不随公开 FPK 或源码附件分发。
+
+随包官方图标的来源及 MIT 许可见 `target/THIRD_PARTY_NOTICES.md`，也可在[公开仓库](https://github.com/CyberShadowX/CloudSaver-For-FNOS/blob/main/THIRD_PARTY_NOTICES.md)查看。历史 v1.0.1 包保留原名称；更新图标与显示名称请安装 v1.0.2 或后续版本。

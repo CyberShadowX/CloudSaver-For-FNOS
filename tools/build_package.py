@@ -13,14 +13,17 @@ import tarfile
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.0.1"
+VERSION = "1.0.2"
+# Keep the installed identity stable so upgrades retain the existing account and data.
 APP_ID = "CloudSaver"
+DISPLAY_NAME = "CloudSaver For FNOS"
+PACKAGE_BASENAME = "CloudSaver-For-FNOS"
 FNPACK_SHA256 = "d7af4bd716b009c58f5bcd931615f39db121e7d4b75dc759e575c4fb2879b6ee"
 SOURCES = (
     "runtime/supervisor.py", "runtime/loopback.cjs", "runtime/branding.js", "runtime/lifecycle.py",
     "tools/setup_runtime.py", "tools/fetch_image.py", "tools/extract_runtime.py",
     "tools/config_integrity.py", "tools/snapshot_state.py", "upstream.json", "LICENSE",
-    "docs/USER_GUIDE.md",
+    "docs/USER_GUIDE.md", "THIRD_PARTY_NOTICES.md",
 )
 HOOK = '#!/bin/sh\nset -eu\numask 077\nexec python3 "${TRIM_APPDEST}/runtime/lifecycle.py" "$@"\n'
 
@@ -125,7 +128,7 @@ def build(fnpack: Path, output: Path) -> dict:
     if digest(fnpack) != FNPACK_SHA256:
         raise ValueError("The fnpack binary differs from the pinned Windows 1.2.3 tool")
     output.mkdir(parents=True, exist_ok=True)
-    final = output / f"{APP_ID}-{VERSION}-x86.fpk"
+    final = output / f"{PACKAGE_BASENAME}-{VERSION}-x86.fpk"
     if final.exists():
         raise ValueError("Refusing to overwrite an existing release artifact")
     work = ROOT / "build"
@@ -145,10 +148,10 @@ def build(fnpack: Path, output: Path) -> dict:
     save(stage / "ICON.PNG", (ROOT / "assets/icon_64.png").read_bytes())
     save(stage / "ICON_256.PNG", (ROOT / "assets/icon_256.png").read_bytes())
     save(stage / "LICENSE", (ROOT / "LICENSE").read_bytes())
-    manifest = {"appname": APP_ID, "version": VERSION, "display_name": "CloudSaver",
-                "desc": "CloudSaver 原生封装，首次安装获取固定官方程序，运行不依赖 Docker。",
+    manifest = {"appname": APP_ID, "version": VERSION, "display_name": DISPLAY_NAME,
+                "desc": DISPLAY_NAME + " 飞牛原生封装，首次安装获取固定官方程序，运行不依赖 Docker。",
                 "platform": "x86", "source": "thirdparty", "maintainer": "CyberShadowX",
-                "distributor": "CyberShadowX", "maintainer_url": "https://github.com/CyberShadowX/CloudSaver",
+                "distributor": "CyberShadowX", "maintainer_url": "https://github.com/CyberShadowX/CloudSaver-For-FNOS",
                 "os_min_version": "1.2.1010", "ctl_stop": "true", "desktop_uidir": "ui",
                 "desktop_applaunchname": APP_ID + ".Application", "service_port": "8008",
                 "checkport": "true", "disable_authorization_path": "true"}
@@ -156,7 +159,7 @@ def build(fnpack: Path, output: Path) -> dict:
     save(stage / "config/privilege", {"defaults": {"run-as": "root"}, "username": APP_ID, "groupname": APP_ID})
     save(stage / "config/resource", {})
     save(stage / "app/ui/config", {".url": {APP_ID + ".Application": {
-        "title": "CloudSaver", "icon": "images/icon_{0}.png", "type": "url", "protocol": "http",
+        "title": DISPLAY_NAME, "icon": "images/icon_{0}.png", "type": "url", "protocol": "http",
         "port": "8008", "url": "/", "allUsers": False, "control": {"accessPerm": "readonly"}}}})
     save(stage / "wizard/install", [{"stepTitle": "安装说明", "items": [{"type": "tips", "helpText":
         "首次安装需联网，从固定官方来源获取 CloudSaver 0.9.3 程序。运行不依赖 Docker。安装包不含个人频道、账号或网盘配置；已有部署请先备份并完成迁移验收。"}]}])

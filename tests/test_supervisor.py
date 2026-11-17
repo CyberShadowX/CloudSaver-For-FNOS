@@ -342,10 +342,12 @@ class Element {
 const sidebarTitle=new Element('Cloud Saver');
 const container=new Element(); container.heading=sidebarTitle;
 const sidebarLogo=new Element('', 'Cloud Saver Logo', ['logo__image']); sidebarLogo.container=container;
-const loginLogo=new Element('', 'Cloud Saver', ['login__logo']);
-const loginTitle=new Element('Cloud Saver');
+const loginLogo=new Element('', 'CloudSaver', ['login__logo']);
+const loginTitle=new Element('CloudSaver');
 const resourceTitle=new Element('Cloud Saver');
 const resourceImage=new Element('', 'Cloud Saver Logo', ['resource__image']);
+const modernResourceTitle=new Element('CloudSaver');
+const modernResourceImage=new Element('', 'CloudSaver Logo', ['resource__image']);
 const anchor=(href,classes=['github-link'])=>{
  const element=new Element('GitHub',null,classes);
  if(href!==null) element.setAttribute('href',href);
@@ -355,11 +357,15 @@ const anchor=(href,classes=['github-link'])=>{
 const linkCases=[
  ['https://github.com/jiangrui1994/cloudsaver','https://github.com/jiangrui1994/CloudSaver'],
  ['https://github.com/CyberShadowX/cLoUdSaVeR/releases/tag/V1?next=%2fcloudsaver#cloudsaver',
-  'https://github.com/CyberShadowX/CloudSaver/releases/tag/V1?next=%2fcloudsaver#cloudsaver'],
+  'https://github.com/CyberShadowX/CloudSaver-For-FNOS/releases/tag/V1?next=%2fcloudsaver#cloudsaver'],
  ['https://github.com/JIANGRUI1994/CLOUDSAVER/?q=cloudsaver#cloudsaver',
   'https://github.com/JIANGRUI1994/CloudSaver/?q=cloudsaver#cloudsaver'],
  ['https://github.com/CyberShadowX/cloudsaver?download=cloudsaver#readme',
-  'https://github.com/CyberShadowX/CloudSaver?download=cloudsaver#readme'],
+  'https://github.com/CyberShadowX/CloudSaver-For-FNOS?download=cloudsaver#readme'],
+ ['https://github.com/CYBERSHADOWX/CLOUDSAVER-FOR-FNOS/releases?next=CloudSaver#assets',
+  'https://github.com/CYBERSHADOWX/CloudSaver-For-FNOS/releases?next=CloudSaver#assets'],
+ ['https://github.com/CyberShadowX/CloudSaver-For-FNOS',
+  'https://github.com/CyberShadowX/CloudSaver-For-FNOS'],
  ['https://github.com/jiangrui1994/CloudSaver','https://github.com/jiangrui1994/CloudSaver'],
  ...[
   null,'/jiangrui1994/cloudsaver','http://github.com/jiangrui1994/cloudsaver',
@@ -368,6 +374,10 @@ const linkCases=[
   'https://github.com/another-author/cloudsaver',
   'https://github.com/jiangrui1994/cloudsaver-extra',
   'https://github.com/jiangrui1994/cloudsaver.git',
+  'https://github.com/jiangrui1994/cloudsaver-for-fnos',
+  'https://github.com/CyberShadowX/cloudsaver-for-fnos-extra',
+  'https://github.com/CyberShadowX/cloudsaver-extra',
+  'https://github.com/CyberShadowX/cloudsaver.git',
   'https://github.com/jiangrui1994/another-project?repo=cloudsaver',
   'https://example.test/jiangrui1994/cloudsaver',
  ].map(href=>[href,href]),
@@ -403,13 +413,15 @@ global.document={
 };
 global.window={setInterval(callback,delay) {assert.equal(delay,1000);discover=callback;return 1;}};
 require(process.argv[1]);
-assert.equal(sidebarTitle.textContent,'CloudSaver');
-assert.equal(loginTitle.textContent,'CloudSaver');
-assert.equal(sidebarLogo.getAttribute('alt'),'CloudSaver Logo');
-assert.equal(loginLogo.getAttribute('alt'),'CloudSaver');
-assert.equal(document.title,'CloudSaver');
+assert.equal(sidebarTitle.textContent,'CloudSaver For FNOS');
+assert.equal(loginTitle.textContent,'CloudSaver For FNOS');
+assert.equal(sidebarLogo.getAttribute('alt'),'CloudSaver For FNOS Logo');
+assert.equal(loginLogo.getAttribute('alt'),'CloudSaver For FNOS');
+assert.equal(document.title,'CloudSaver For FNOS');
 assert.equal(resourceTitle.textContent,'Cloud Saver');
 assert.equal(resourceImage.getAttribute('alt'),'Cloud Saver Logo');
+assert.equal(modernResourceTitle.textContent,'CloudSaver');
+assert.equal(modernResourceImage.getAttribute('alt'),'CloudSaver Logo');
 for(let index=0;index<linkCases.length;index++) {
  const [original,expected]=linkCases[index];
  const attributes={'data-keep':'untouched',target:'_blank',rel:'noopener noreferrer'};
@@ -420,28 +432,40 @@ for(let index=0;index<linkCases.length;index++) {
 assert.equal(resourceLink.getAttribute('href'),resourceHref);
 assert.equal(channelLink.getAttribute('href'),'https://github.com/CyberShadowX/cloudsaver');
 for (const heading of [sidebarTitle,loginTitle]) assert.deepEqual(heading.attributes,{'data-keep':'untouched'});
-sidebarTitle.textContent='Cloud Saver'; sidebarLogo.setAttribute('alt','Cloud Saver Logo');
+sidebarTitle.textContent='CloudSaver'; sidebarLogo.setAttribute('alt','CloudSaver Logo');
+loginTitle.textContent='Cloud Saver';loginLogo.setAttribute('alt','Cloud Saver');
+document.title='CloudSaver';
 links[0].setAttribute('href','https://github.com/jiangrui1994/cloudsaver/issues?state=open#top');
 observer.callback();
-assert.equal(sidebarTitle.textContent,'CloudSaver');
-assert.equal(sidebarLogo.getAttribute('alt'),'CloudSaver Logo');
+assert.equal(sidebarTitle.textContent,'CloudSaver For FNOS');
+assert.equal(sidebarLogo.getAttribute('alt'),'CloudSaver For FNOS Logo');
+assert.equal(loginTitle.textContent,'CloudSaver For FNOS');
+assert.equal(loginLogo.getAttribute('alt'),'CloudSaver For FNOS');
+assert.equal(document.title,'CloudSaver For FNOS');
 assert.equal(links[0].getAttribute('href'),'https://github.com/jiangrui1994/CloudSaver/issues?state=open#top');
 const remountedTitle=new Element('Cloud Saver');
 const remountedContainer=new Element();remountedContainer.heading=remountedTitle;
 const remountedLogo=new Element('', 'Cloud Saver Logo', ['logo__image']);remountedLogo.container=remountedContainer;
-const remountedLink=anchor('https://github.com/jiangrui1994/cloudsaver/releases?tag=old#assets');
+const remountedLink=anchor('https://github.com/CyberShadowX/cloudsaver/releases?tag=old#assets');
 allowed.add(remountedLink);links.splice(0,links.length,remountedLink);
 allowed.add(remountedTitle);allowed.add(remountedLogo);images.push(remountedLogo);discover();
-assert.equal(remountedTitle.textContent,'CloudSaver');
-assert.equal(remountedLogo.getAttribute('alt'),'CloudSaver Logo');
-assert.equal(remountedLink.getAttribute('href'),'https://github.com/jiangrui1994/CloudSaver/releases?tag=old#assets');
-sidebarTitle.textContent='Cloud Saver resource';sidebarLogo.setAttribute('alt','Cloud Saver illustration');
-document.title='Cloud Saver resource';observer.callback();
-assert.equal(sidebarTitle.textContent,'Cloud Saver resource');
-assert.equal(sidebarLogo.getAttribute('alt'),'Cloud Saver illustration');
-assert.equal(document.title,'Cloud Saver resource');
+assert.equal(remountedTitle.textContent,'CloudSaver For FNOS');
+assert.equal(remountedLogo.getAttribute('alt'),'CloudSaver For FNOS Logo');
+assert.equal(remountedLink.getAttribute('href'),'https://github.com/CyberShadowX/CloudSaver-For-FNOS/releases?tag=old#assets');
+const brandedAttributes=JSON.stringify([sidebarLogo.attributes,loginLogo.attributes,remountedLink.attributes]);
+observer.callback();discover();
+assert.equal(JSON.stringify([sidebarLogo.attributes,loginLogo.attributes,remountedLink.attributes]),brandedAttributes);
+for (const prefix of ['Cloud Saver','CloudSaver']) {
+ sidebarTitle.textContent=prefix+' resource';sidebarLogo.setAttribute('alt',prefix+' illustration');
+ document.title=prefix+' resource';observer.callback();
+ assert.equal(sidebarTitle.textContent,prefix+' resource');
+ assert.equal(sidebarLogo.getAttribute('alt'),prefix+' illustration');
+ assert.equal(document.title,prefix+' resource');
+}
 assert.equal(resourceTitle.textContent,'Cloud Saver');
 assert.equal(resourceImage.getAttribute('alt'),'Cloud Saver Logo');
+assert.equal(modernResourceTitle.textContent,'CloudSaver');
+assert.equal(modernResourceImage.getAttribute('alt'),'CloudSaver Logo');
 assert.equal(resourceLink.getAttribute('href'),resourceHref);
 assert.equal(channelLink.getAttribute('href'),'https://github.com/CyberShadowX/cloudsaver');
 console.log(JSON.stringify({fixedBrands:true,resourcePreserved:true,remountHandled:true,scopedObservers:true,
@@ -755,19 +779,25 @@ class GatewayTests(unittest.IsolatedAsyncioTestCase):
 
     async def test_manifest_changes_only_exact_brand_fields_without_writing_source(self):
         path = self.frontend / "manifest.webmanifest"
-        manifest = {
-            "name": "Cloud Saver", "short_name": "Cloud Saver", "start_url": "/", "display": "standalone",
-            "description": "Cloud Saver resource", "icons": [{"src": "/logo.png", "sizes": "192x192"}],
-        }
-        original = json.dumps(manifest).encode()
-        path.write_bytes(original)
-        response = await self.client.get("/manifest.webmanifest")
-        self.assertEqual(response.content_type, "application/manifest+json")
-        adapted = await response.json()
-        expected = dict(manifest, name="CloudSaver", short_name="CloudSaver")
-        self.assertEqual(adapted, expected)
-        self.assertEqual(path.read_bytes(), original)
-        for unchanged in (b'{"name":"Cloud Saver resource","short_name":"My Library"}', b"not-json"):
+        for name, short_name in (("Cloud Saver", "CloudSaver"), ("CloudSaver", "Cloud Saver")):
+            with self.subTest(name=name, short_name=short_name):
+                manifest = {
+                    "name": name, "short_name": short_name, "start_url": "/", "display": "standalone",
+                    "description": "Cloud Saver", "icons": [{"src": "/CloudSaver/logo.png", "sizes": "192x192"}],
+                    "custom": {"name": "CloudSaver", "resource": "Cloud Saver"},
+                }
+                original = json.dumps(manifest).encode()
+                path.write_bytes(original)
+                response = await self.client.get("/manifest.webmanifest")
+                self.assertEqual(response.content_type, "application/manifest+json")
+                adapted = await response.json()
+                expected = dict(manifest, name="CloudSaver For FNOS", short_name="CloudSaver For FNOS")
+                self.assertEqual(adapted, expected)
+                self.assertEqual(path.read_bytes(), original)
+        for unchanged in (b'{"name":"Cloud Saver resource","short_name":"My Library"}',
+                          b'{"name":"CloudSaver resource","short_name":"My CloudSaver"}',
+                          b'{"name": "CloudSaver For FNOS", "short_name": "CloudSaver For FNOS"}',
+                          b'{"name":["CloudSaver"],"short_name":null}', b"not-json"):
             path.write_bytes(unchanged)
             response = await self.client.get("/manifest.webmanifest")
             self.assertEqual(await response.read(), unchanged)
